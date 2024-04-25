@@ -7,9 +7,8 @@
 * [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
 * [4. Consideraciones generales](#4-consideraciones-generales)
 * [5. Criterios de aceptación del proyecto](#5-criterios-de-aceptación-del-proyecto)
-* [6. Stack de tecnologías](#6-stack-de-tecnologías)
-* [7. Pistas, tips y lecturas complementarias](#7-pistas-tips-y-lecturas-complementarias)
-* [8. Funcionalidades opcionales](#8-funcionalidades-opcionales)
+* [6. Pistas, tips y lecturas complementarias](#7-pistas-tips-y-lecturas-complementarias)
+* [7. Funcionalidades opcionales](#8-funcionalidades-opcionales)
 
 ***
 
@@ -55,115 +54,6 @@ API REST.
 
 
 Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en tu proyecto. Piensa en eso al decidir tu estrategia de trabajo.
-
-### Java
-
-- [ ] **Modificadores de acesso (public, private, protected)**
-
-- [ ] **Variables**
-
-- [ ] **Uso de condicionales**
-
-- [ ] **Uso de bucles (Loops)**
-
-#### Tipos de data
-
-- [ ] **Primitivos**
-
-- [ ] **Datos primitivos vs no primitivos**
-
-- [ ] **Cadenas**
-
-- [ ] **Arreglos**
-
-#### Colecciones
-
-- [ ] **ArrayList**
-
-- [ ] **HashMap**
-
-- [ ] **HashSet**
-
-#### Testing
-
-- [ ] **JUnit**
-
-- [ ] **Mockito**
-
-#### Spring Framework
-
-- [ ] **Initializr**
-
-  <details><summary>Links</summary><p>
-
-  * [Spring Initializr](https://start.spring.io/)
-</p></details>
-
-- [ ] **Spring Boot**
-
-  <details><summary>Links</summary><p>
-
-  * [Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/)
-</p></details>
-
-- [ ] **Controladores**
-
-- [ ] **Servicios**
-
-- [ ] **Spring Data JPA**
-
-  <details><summary>Links</summary><p>
-
-  * [Spring Data JPA - Reference Documentation](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
-</p></details>
-
-- [ ] **Entidad**
-
-- [ ] **Repositorio**
-
-##### Conceptos Core _(Spring Framework)_
-
-- [ ] **Beans**
-
-- [ ] **Inversión de Control**
-
-- [ ] **Anotaciones**
-
-##### Spring Web _(Spring Framework)_
-
-- [ ] **RestController**
-
-- [ ] **RequestMapping**
-
-- [ ] **RequestParam**
-
-##### Testing _(Spring Framework)_
-
-- [ ] **Spring Test**
-
-- [ ] **Hamcrest**
-
-#### Hibernate ORM
-
-- [ ] **Configuración**
-
-- [ ] **Esquema**
-
-- [ ] **Entidad**
-
-- [ ] **Tabla**
-
-- [ ] **Columna**
-
-- [ ] **Identificadores**
-
-- [ ] **Asociaciones**
-
-- [ ] **Colecciones**
-
-- [ ] **Persistencia**
-
-- [ ] **Consultas**
 
 ### Python
 
@@ -596,43 +486,6 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 
 - [ ] **Lenguaje de Modelado Unificado (UML, class diagrams)**
 
-### Node.js
-
-- [ ] **Instalar y usar módulos con npm**
-
-  <details><summary>Links</summary><p>
-
-  * [Sitio oficial de npm (en inglés)](https://www.npmjs.com/)
-</p></details>
-
-- [ ] **Configuración de package.json**
-
-  <details><summary>Links</summary><p>
-
-  * [package.json - Documentación oficial (en inglés)](https://docs.npmjs.com/files/package.json)
-</p></details>
-
-- [ ] **Configuración de npm-scripts**
-
-  <details><summary>Links</summary><p>
-
-  * [scripts - Documentación oficial (en inglés)](https://docs.npmjs.com/misc/scripts)
-</p></details>
-
-- [ ] **process (env, argv, stdin-stdout-stderr, exit-code)**
-
-  <details><summary>Links</summary><p>
-
-  * [Process - Documentación oficial (en inglés)](https://nodejs.org/api/process.html)
-</p></details>
-
-- [ ] **File system (fs, path)**
-
-  <details><summary>Links</summary><p>
-
-  * [File system - Documentación oficial (en inglés)](https://nodejs.org/api/fs.html)
-  * [Path - Documentación oficial (en inglés)](https://nodejs.org/api/path.html)
-</p></details>
 
 ### SQL
 
@@ -824,14 +677,6 @@ menos una compañera.
 * El código _endpoint_ debe contar con test unitarios y e2e.
 
 ***
-
-## 6. Stack de tecnologías
-
-Puedes implementar este proyecto en JavaScript, Python o Java.
-
-* [NodeJs](./docs/stack-node.md)
-* [Java](./docs/stack-java.md)
-* [Python](./docs/stack-python.md)
 
 ## 7. Pistas, tips y lecturas complementarias
 
