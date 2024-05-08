@@ -17,3 +17,6 @@ def get_connection():
         return connection
     except Exception as ex:
         raise ex
+    #finally:
+        #connection.close()
+        #print("Connection closed")

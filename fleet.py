@@ -6,23 +6,30 @@ connection = get_connection()
 
 cursor = connection.cursor()
 
+
 @app.route('/')
 def index():
     return "<p>Hello, World!</p>"
 
-@app.route('/taxis/<id>', methods=['GET'])
+@app.route('/taxis', methods=['GET'])
 def get_taxis():
-    taxi_id = request.args.get('id')
-    cursor.execute("SELECT * from taxis;")
-    record = cursor.fetchall()
-    return jsonify(record)
-#Close communication with database
-#cursor.close()
-#connection.close()
+    page = request.args.get('page', 1, type=int) 
+    limit = request.args.get('limit', 1, type=int)
+    offset = (page - 1) * limit
+    cursor.execute("SELECT * FROM taxis ORDER BY id ASC LIMIT %s OFFSET %s", (limit, offset))
+    records = cursor.fetchall()
+    records_list = []
+    for record in records:
+        records_list.append({
+            'id' : record[0],
+            'plate' : record[1]
+        })
+
+    return jsonify(records_list)
 
 @app.route('/trajectories')
 def call_trajectories():
-    return jsonify(trajectories)
+    return jsonify()
 
 if __name__ == '__main__':
     app.run(debug=True)
