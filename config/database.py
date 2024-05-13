@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 #Connect to Database
 def get_connection():
     try:
