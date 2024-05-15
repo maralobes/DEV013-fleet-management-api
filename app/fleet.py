@@ -2,10 +2,14 @@ from flask import Flask
 from app.controllers.taxi import *
 from app.controllers.trajectories import *
 from app.routes.routes import *
+from flasgger import Swagger
+
+
 
 app = Flask(__name__)
 app.register_blueprint(controller_taxis, url_prefix='/taxis')
 app.register_blueprint(controller_trajectories, url_prefix='/trajectories')
+endpoints_documentation = Swagger(app)
 
 # @app.route('/')
 # def index():
