@@ -1,0 +1,444 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Fleet Managment Api",
+    "description": "The Fleet Managment API allows you to request information about taxis.\n### Check out its awesome features:\n\n* Get all taxis information endpoint 🚖\n* Retrieve complete trajectories endpoint 🗺️\n* Get last trajectories endpoint 📍",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.11"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:5000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "taxis",
+      "description": "Operations about taxis"
+    },
+    {
+      "name": "trajectories",
+      "description": "Operations on trajectories"
+    }
+  ],
+  "paths": {
+    "/taxis": {
+      "get": {
+        "tags": [
+          "taxis"
+        ],
+        "summary": "Return a list taxis",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Plate",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of elements per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Taxi"
+                },
+                "examples": {
+                  "AllUsers": {
+                    "value": [
+                      {
+                        "id": 974,
+                        "plate": "HIJ-876"
+                      },
+                      {
+                        "id": 8974,
+                        "plate": "UTRW-8967"
+                      },
+                      {
+                        "id": 2345,
+                        "plate": "PFD-9954"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trajectories/{taxiId}": {
+      "get": {
+        "tags": [
+          "trajectories"
+        ],
+        "summary": "List trajectories",
+        "parameters": [
+          {
+            "name": "taxiId",
+            "in": "path",
+            "description": "Taxis'id to consult",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": 78456
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Taxis'date to consult",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "example": "2021-09-14T00:00:00.000Z"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of elements per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Trajectory"
+                  }
+                },
+                "examples": {
+                  "AllUsers": {
+                    "value": [
+                      {
+                        "id": 974,
+                        "taxiId": 8768,
+                        "date": "2008-08-17T16:55:47.000Z",
+                        "latitude": 116.26536,
+                        "longitude": 39.89442
+                      },
+                      {
+                        "id": 8974,
+                        "taxiId": 89675,
+                        "date": "2008-08-18T13:55:47.000Z",
+                        "latitude": 116.27768,
+                        "longitude": 39.92311
+                      },
+                      {
+                        "id": 2345,
+                        "taxiId": 99546,
+                        "date": "2008-08-19T12:55:47.000Z",
+                        "latitude": 116.28978,
+                        "longitude": 39.89489
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Taxi id not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trajectories/latest": {
+      "get": {
+        "tags": [
+          "trajectories"
+        ],
+        "summary": "List latest trajectories",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LatestTrajectory"
+                },
+                "examples": {
+                  "AllUsers": {
+                    "value": [
+                      {
+                        "taxiId": 8768,
+                        "plate": "OPGF-1209",
+                        "date": "2008-08-17T16:55:47.000Z",
+                        "latitude": 116.26536,
+                        "longitude": 39.89442
+                      },
+                      {
+                        "taxiId": 89675,
+                        "plate": "RTYE-9745",
+                        "date": "2008-08-18T13:55:47.000Z",
+                        "latitude": 116.27768,
+                        "longitude": 39.92311
+                      },
+                      {
+                        "taxiId": 99546,
+                        "plate": "CNJH-6785",
+                        "date": "2008-08-19T12:55:47.000Z",
+                        "latitude": 116.28978,
+                        "longitude": 39.89489
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Taxi": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 974
+          },
+          "plate": {
+            "type": "string",
+            "example": "FNDF-2678"
+          }
+        }
+      },
+      "Taxis": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "plate": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Trajectory": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 974
+          },
+          "taxiId": {
+            "type": "integer",
+            "format": "int64",
+            "example": 9876
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "example": "2021-02-19T14:41:47.000Z"
+          },
+          "latitude": {
+            "type": "number",
+            "example": 116.28978
+          },
+          "longitude": {
+            "type": "number",
+            "example": 39.89489
+          }
+        }
+      },
+      "Trajectories": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64",
+              "example": 974
+            },
+            "taxiId": {
+              "type": "integer",
+              "format": "int64",
+              "example": 9876
+            },
+            "date": {
+              "type": "string",
+              "format": "date",
+              "example": "2021-02-19T14:41:47.000Z"
+            },
+            "latitude": {
+              "type": "number",
+              "example": 116.28978
+            },
+            "longitude": {
+              "type": "number",
+              "example": 39.89489
+            }
+          }
+        }
+      },
+      "LatestTrajectory": {
+        "type": "object",
+        "properties": {
+          "taxiId": {
+            "type": "integer",
+            "format": "int64",
+            "example": 974
+          },
+          "plate": {
+            "type": "string",
+            "example": "FNDF-2678"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "example": "2021-02-19T14:41:47.000Z"
+          },
+          "latitude": {
+            "type": "number",
+            "example": 116.28978
+          },
+          "longitude": {
+            "type": "number",
+            "example": 39.89489
+          }
+        }
+      },
+      "LatestTrajectories": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "taxiId": {
+              "type": "integer",
+              "format": "int64",
+              "example": 974
+            },
+            "plate": {
+              "type": "string",
+              "example": "FNDF-2678"
+            },
+            "date": {
+              "type": "string",
+              "format": "date",
+              "example": "2021-02-19T14:41:47.000Z"
+            },
+            "latitude": {
+              "type": "number",
+              "example": 116.28978
+            },
+            "longitude": {
+              "type": "number",
+              "example": 39.89489
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "Taxis": {
+        "description": "List all taxis that exist",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Taxis"
+            }
+          }
+        }
+      },
+      "Trajectories": {
+        "description": "List of trajectories",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Trajectories"
+              }
+            }
+          }
+        }
+      },
+      "LatestTrajectories": {
+        "description": "List of the latest trajectories",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/LatestTrajectories"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
