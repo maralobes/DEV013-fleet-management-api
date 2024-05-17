@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.register_blueprint(controller_taxis, url_prefix='/taxis')
 
 #Register trajectories blueprint
-app.register_blueprint(controller_trajectories, url_prefix='/trajectories')
+app.register_blueprint(controller_trajectories, url_prefix='/trajectories/<taxi_id>')
 
 #Create swagger route
 @app.route("/static/<path:path>")
