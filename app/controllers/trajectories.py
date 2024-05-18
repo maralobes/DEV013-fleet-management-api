@@ -36,7 +36,7 @@ def call_last_trajectories():
     # next_day = date_obj + timedelta(days=1)
     # next_day_timestamp = next_day.strftime("%Y-%m-%d 00:00:00")
     # print(timestamp_str)
-    cursor.execute("SELECT taxi_id, MAX(date) FROM trajectories GROUP BY taxi_id LIMIT %s OFFSET %s", (limit, offset))
+    cursor.execute("SELECT DISTINCT ON (taxi_id) id, taxi_id, date, latitude, longitude FROM (SELECT id, taxi_id, date, latitude, longitude, ROW_NUMBER() OVER (PARTITION BY taxi_id ORDER BY date DESC) AS row_num FROM trajectories) AS subquery WHERE row_num = 1 LIMIT %s OFFSET %s", (limit, offset))
     db_trajectories = cursor.fetchall()
     print(db_trajectories)
     trajectory_list = [Trajectories(db_trajectory[0], db_trajectory[1], db_trajectory[2], db_trajectory[3], db_trajectory[4]) for db_trajectory in db_trajectories]
