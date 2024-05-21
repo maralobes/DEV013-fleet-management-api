@@ -45,12 +45,6 @@ def call_last_trajectories():
         page = request.args.get('page', 1, type=int) 
         limit = request.args.get('limit', 1, type=int)
         offset = (page - 1) * limit
-        # date_obj = datetime.strptime(date, "%Y-%m-%d")
-        # print(date_obj)
-        # timestamp_str = date_obj.strftime("%Y-%m-%d 00:00:00")
-        # next_day = date_obj + timedelta(days=1)
-        # next_day_timestamp = next_day.strftime("%Y-%m-%d 00:00:00")
-        # print(timestamp_str)
         cursor.execute(
             "SELECT DISTINCT ON (taxi_id) id, taxi_id, date, latitude, longitude FROM (SELECT id, taxi_id, date, latitude, longitude, ROW_NUMBER() OVER (PARTITION BY taxi_id ORDER BY date DESC) AS row_num FROM trajectories) AS subquery WHERE row_num = 1 LIMIT %s OFFSET %s", 
             (limit, offset)
