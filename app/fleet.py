@@ -3,6 +3,7 @@ from app.controllers.taxi import *
 from app.controllers.trajectories import *
 from app.routes.routes import *
 from flask_swagger_ui import get_swaggerui_blueprint
+from app.utils.error_managment import Errors
 
 
 #Initialize flask app
@@ -30,6 +31,11 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 )
 #Register swagger blueprint
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+
+#Register error handling blueprints
+app.register_error_handler(400, Errors.handle_400_error)
+app.register_error_handler(404, Errors.handle_404_error)
+app.register_error_handler(500, Errors.handle_500_error)
 
 # swagger_template = {
 #     "openapi": "3.0.3",  # Update with the version used in your Swagger specification
@@ -99,4 +105,4 @@ app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 #     return jsonify(records_list)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(Debug=True)

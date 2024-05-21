@@ -1,8 +1,13 @@
 import psycopg2
 import os
 from dotenv import load_dotenv
+from psycopg2 import DatabaseError
+import logging
 
 load_dotenv()
+
+#Setup logging
+logging.basicConfig(level=logging.ERROR)
 
 #Connect to Database
 def get_connection():
@@ -14,8 +19,9 @@ def get_connection():
         host=os.getenv("POSTGRES_HOST"),
         )
         return connection
-    except Exception as ex:
-        raise ex
+    except DatabaseError as ex:
+        logging.error(f"Database connection error: {ex}")
+        raise
     #finally:
         #connection.close()
         #print("Connection closed")
