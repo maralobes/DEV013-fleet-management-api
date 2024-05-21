@@ -21,7 +21,7 @@ def get_taxis():
 
         return jsonify(taxi_dict_list)
     except DatabaseError as ex:
-        return Errors.handle_500.error(ex)
+        return Errors.handle_500_error(ex)
     except Exception as ex:
-        return Errors.handle_500.error(ex)
+        return Errors.handle_500_error(ex)
 
