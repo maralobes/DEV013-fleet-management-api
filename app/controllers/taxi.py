@@ -64,6 +64,8 @@ def get_taxis():
         offset = (page - 1) * limit
         cursor.execute("SELECT * FROM taxis ORDER BY id ASC LIMIT %s OFFSET %s", (limit, offset))
         db_taxis = cursor.fetchall()
+        if not db_taxis:
+            return Errors.handle_404_error(None) #Not found taxis
         taxi_list = [Taxi(db_taxi[0], db_taxi[1]) for db_taxi in db_taxis]
         # for db_taxi in db_taxis:
         #     taxi_list.append(Taxi(db_taxi[0], db_taxi[1]))
