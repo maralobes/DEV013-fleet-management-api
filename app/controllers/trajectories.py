@@ -7,11 +7,19 @@ from psycopg2 import DatabaseError, ProgrammingError
 from app.utils.error_managment import Errors
 
 
+def validate_pagination_args(page, limit):
+    if page < 1 or limit < 1:
+        return False, "Page and limit must be positive integers."
+    return True, ""
+
 @controller_trajectories.route('/<taxi_id>/<date>', methods=['GET'])
 def call_trajectories(taxi_id=0, date=''):
     try:   
         page = request.args.get('page', 1, type=int) 
         limit = request.args.get('limit', 1, type=int)
+        is_valid, error_message = validate_pagination_args(page, limit)
+        if not is_valid:
+            return Errors.handle_400_error(error_message)
         offset = (page - 1) * limit
         date_obj = datetime.strptime(date, "%Y-%m-%d")
         timestamp_str = date_obj.strftime("%Y-%m-%d 00:00:00")
@@ -38,6 +46,9 @@ def call_last_trajectories():
     try:
         page = request.args.get('page', 1, type=int) 
         limit = request.args.get('limit', 1, type=int)
+        is_valid, error_message = validate_pagination_args(page, limit)
+        if not is_valid:
+            return Errors.handle_400_error(error_message)
         offset = (page - 1) * limit
         cursor.execute("SELECT DISTINCT ON (t.taxi_id) t.taxi_id, x.plate, t.date, t.latitude, t.longitude FROM (SELECT taxi_id, date, latitude, longitude, ROW_NUMBER() OVER (PARTITION BY taxi_id ORDER BY date DESC) AS row_num FROM trajectories) AS t JOIN taxis x ON t.taxi_id = x.id WHERE t.row_num = 1 LIMIT %s OFFSET %s", (limit, offset))
         db_latest_trajectories = cursor.fetchall()

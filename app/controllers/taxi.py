@@ -10,7 +10,9 @@ from app.utils.error_managment import Errors
 def get_taxis():
     try:
         page = request.args.get('page', 1, type=int) 
-        limit = request.args.get('limit', 100, type=int)
+        limit = request.args.get('limit', 10, type=int)
+        if page < 1 or limit < 1:
+            return Errors.handle_400_error("Page and limit must be positive integers.")
         offset = (page - 1) * limit
         cursor.execute("SELECT * FROM taxis ORDER BY id ASC LIMIT %s OFFSET %s", (limit, offset))
         db_taxis = cursor.fetchall()

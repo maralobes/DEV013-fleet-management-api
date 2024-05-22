@@ -1,5 +1,4 @@
 from app.controllers.taxi import *
-from flask import json
 import requests
 
 
@@ -62,3 +61,8 @@ def test_get_latest():
         assert "date" in latest_trajectory
         assert "latitude" in latest_trajectory
         assert "longitude" in latest_trajectory
+    
+def test_taxis_pagination_with_negative_page(client):
+    response = client.get('/taxis?page=-1&limit=10')
+    assert response.status_code == 400
+    assert b"Page and limit must be positive integers." in response.data
