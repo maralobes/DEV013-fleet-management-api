@@ -12,4 +12,4 @@ class Errors:
     @staticmethod
     def handle_500_error(_error):
         """Return a 500 http status code"""
-        return make_response(jsonify({'error' : 'Internal server error occured'}, 500))
+        return make_response(jsonify({'error' : 'Internal server error occured'}, 500, _error))
