@@ -1,10 +1,11 @@
 from app.controllers.taxi import *
-from flask import request, json
+from flask import json
+import requests
 
 
-def test_get_taxis_by_correct_params():
-    url = 'https://run.mocky.io/v3/4f0ce8bf-5e2c-431c-a645-cf5a38a252b2'
-    response = request.get(url)
+def test_get_taxis():
+    url = 'https://run.mocky.io/v3/2268ee9a-cd4d-4efb-b916-04de79127b4d'
+    response = requests.get(url)
 
     #Verify status code
     assert response.status_code == 200
@@ -14,4 +15,8 @@ def test_get_taxis_by_correct_params():
     
     #Verify response structure (id and plate)
     taxis = response.json()
-    assert response.s
+    assert isinstance(taxis, list)
+    for taxi in taxis:
+        assert isinstance(taxi, dict)
+        assert "id" in taxi
+        assert "plate" in taxi
