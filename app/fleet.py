@@ -17,6 +17,7 @@ app.register_blueprint(controller_trajectories, url_prefix='/trajectories')
 
 #Create swagger route
 @app.route("/static/<path:path>")
+"""Returns swagger.json"""
 def send_static(path):
     return send_from_directory('static', path)
 
@@ -26,7 +27,7 @@ swaggerui_blueprint = get_swaggerui_blueprint(
     SWAGGER_URL,
     API_URL,
     config={
-        'app_name': "Fleet Managment Api"
+        'app_name': "Fleet Management Api"
     }
 )
 #Register swagger blueprint
@@ -38,4 +39,4 @@ app.register_error_handler(404, Errors.handle_404_error)
 app.register_error_handler(500, Errors.handle_500_error)
 
 if __name__ == '__main__':
-    app.run(Debug=True)
+    app.run(debug=True)

@@ -2,9 +2,9 @@ from app.controllers.taxi import *
 import requests
 
 
-def test_get_taxis():
+def test_get_taxis(client):
     url = 'https://run.mocky.io/v3/2268ee9a-cd4d-4efb-b916-04de79127b4d'
-    response = requests.get(url)
+    response = client.get(url)
 
     #Verify status code
     assert response.status_code == 200

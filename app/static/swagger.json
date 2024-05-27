@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Fleet Managment Api",
+    "title": "Fleet Management Api",
     "description": "The Fleet Managment API allows you to request information about taxis.\n### Check out its awesome features:\n\n* Get all taxis information endpoint 🚖\n* Retrieve complete trajectories endpoint 🗺️\n* Get last trajectories endpoint 📍",
     "license": {
       "name": "Apache 2.0",

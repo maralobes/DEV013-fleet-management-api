@@ -13,6 +13,7 @@ def validate_pagination_args(page, limit):
     return True, ""
 
 @controller_trajectories.route('/<taxi_id>/<date>', methods=['GET'])
+"""Calls all trajectories of a taxi by id and date"""
 def call_trajectories(taxi_id=0, date=''):
     try:   
         page = request.args.get('page', 1, type=int) 
@@ -42,6 +43,7 @@ def call_trajectories(taxi_id=0, date=''):
         return Errors.handle_500_error(ex)
 
 @controller_trajectories.route('/latest', methods=['GET'])
+"""Calls the latest trajectories of all taxis"""
 def call_last_trajectories():
     try:
         page = request.args.get('page', 1, type=int) 
